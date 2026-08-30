@@ -1,88 +1,79 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Search, Menu, X, Wrench } from "lucide-react";
+import { Home, Search } from "lucide-react";
 import { CATEGORIES } from "../data/tools.js";
+import SearchModal from "./SearchModal.jsx";
 
 export default function TopBar({ onSearch, searchValue }) {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const navigate = useNavigate();
 
+  function goHome() {
+    onSearch?.("");
+    navigate("/");
+  }
+
   return (
-    <header className="sticky top-0 z-40 bg-bg/85 backdrop-blur-md border-b border-bg-border">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2 shrink-0">
-          <span className="flex items-center justify-center w-8 h-8 rounded-sm bg-accent/10 border border-accent/30">
-            <Wrench size={16} className="text-accent" />
-          </span>
-          <span className="font-display font-semibold text-ink text-[17px] tracking-tight">
-            UtilityStack
-          </span>
-        </Link>
-
-        <div className="hidden md:flex flex-1 max-w-md relative">
-          <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-faint" />
-          <input
-            type="text"
-            placeholder="Search 56 tools…"
-            value={searchValue || ""}
-            onChange={(e) => {
-              onSearch?.(e.target.value);
-              if (window.location.pathname !== "/") navigate("/");
-            }}
-            className="input-field pl-9"
-          />
-        </div>
-
-        <nav className="hidden md:flex items-center gap-1">
-          {CATEGORIES.slice(0, 3).map((c) => (
-            <Link
-              key={c}
-              to={`/?category=${encodeURIComponent(c)}`}
-              className="text-caption text-ink-muted hover:text-ink px-3 py-2 rounded-sm transition-colors"
-            >
-              {c}
-            </Link>
-          ))}
-        </nav>
-
-        <button
-          className="md:hidden text-ink-muted"
-          onClick={() => setMobileOpen((v) => !v)}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={20} /> : <Menu size={20} />}
-        </button>
-      </div>
-
-      {mobileOpen && (
-        <div className="md:hidden px-4 pb-4 space-y-3">
-          <div className="relative">
-            <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-ink-faint" />
-            <input
-              type="text"
-              placeholder="Search 56 tools…"
-              value={searchValue || ""}
-              onChange={(e) => {
-                onSearch?.(e.target.value);
-                if (window.location.pathname !== "/") navigate("/");
-              }}
-              className="input-field pl-9"
-            />
-          </div>
-          <div className="flex flex-wrap gap-2">
-            {CATEGORIES.map((c) => (
-              <Link
-                key={c}
-                to={`/?category=${encodeURIComponent(c)}`}
-                onClick={() => setMobileOpen(false)}
-                className="text-caption text-ink-muted hover:text-ink px-3 py-1.5 rounded-full border border-bg-border"
-              >
-                {c}
+    <>
+      <nav className="sticky top-0 z-50 bg-zinc-950/60 backdrop-blur-2xl border-b border-white/5 shadow-[0_4px_30px_rgba(0,0,0,0.3)]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-8 min-w-0">
+              <Link to="/" onClick={() => onSearch?.("")} className="text-xl font-bold tracking-tight text-white flex items-center gap-2.5 shrink-0">
+                <svg width="30" height="30" viewBox="0 0 64 64" fill="none" style={{ filter: "drop-shadow(0 0 8px rgba(52,211,153,0.5))" }}>
+                  <defs>
+                    <linearGradient id="pulseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#34d399" />
+                      <stop offset="100%" stopColor="#5eead4" />
+                    </linearGradient>
+                  </defs>
+                  <path
+                    d="M8 32 H20 L26 22 L34 42 L40 32 H56"
+                    stroke="url(#pulseGrad)"
+                    strokeWidth="3.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+                OpsPulse
               </Link>
-            ))}
+              <div className="hidden md:flex items-center gap-5 text-sm font-medium text-zinc-400 overflow-x-auto no-scrollbar">
+                <Link to="/" onClick={() => onSearch?.("")} className="hover:text-white transition whitespace-nowrap">
+                  All Tools
+                </Link>
+                {CATEGORIES.map((cat) => (
+                  <Link
+                    key={cat}
+                    to={`/?category=${encodeURIComponent(cat)}`}
+                    className="hover:text-white transition whitespace-nowrap"
+                  >
+                    {cat}
+                  </Link>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                onClick={goHome}
+                title="Home"
+                className="w-9 h-9 flex items-center justify-center rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition"
+              >
+                <Home size={18} />
+              </button>
+              <button
+                onClick={() => setSearchOpen(true)}
+                title="Search"
+                className="w-9 h-9 flex items-center justify-center rounded-lg text-zinc-400 hover:text-white hover:bg-zinc-800 transition"
+              >
+                <Search size={18} />
+              </button>
+            </div>
           </div>
         </div>
-      )}
-    </header>
+      </nav>
+
+      <SearchModal open={searchOpen} onClose={() => setSearchOpen(false)} onSearch={onSearch} />
+    </>
   );
 }

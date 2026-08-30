@@ -593,3 +593,39 @@ export function getToolBySlug(slug) {
 export function getRelatedTools(tool, count = 3) {
   return TOOLS.filter((t) => t.category === tool.category && t.id !== tool.id).slice(0, count);
 }
+
+// Accent color per category — used for card labels, hover links, and
+// the tilt-glow effect on the dashboard grid.
+export const CATEGORY_ACCENT = {
+  "Email & Domain Security": {
+    text: "text-blue-400",
+    hoverText: "hover:text-blue-300",
+    glow: "rgba(59, 130, 246, 0.25)",
+  },
+  "Web & Infrastructure": {
+    text: "text-emerald-400",
+    hoverText: "hover:text-emerald-300",
+    glow: "rgba(16, 185, 129, 0.25)",
+  },
+  "SEO & Content": {
+    text: "text-amber-400",
+    hoverText: "hover:text-amber-300",
+    glow: "rgba(245, 158, 11, 0.25)",
+  },
+  "E-commerce & Marketing": {
+    text: "text-pink-400",
+    hoverText: "hover:text-pink-300",
+    glow: "rgba(236, 72, 153, 0.25)",
+  },
+  "Finance & Operations": {
+    text: "text-cyan-400",
+    hoverText: "hover:text-cyan-300",
+    glow: "rgba(34, 211, 238, 0.25)",
+  },
+  "Dev/API Tools": {
+    text: "text-purple-400",
+    hoverText: "hover:text-purple-300",
+    glow: "rgba(168, 85, 247, 0.25)",
+  },
+};
+

@@ -58,4 +58,11 @@
   .code-block {
     @apply bg-bg border border-bg-border rounded-sm p-4 font-mono text-caption text-ink overflow-x-auto;
   }
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 }
