@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: #0a0b0d;
+    background-image: radial-gradient(
+      1200px 600px at 50% -10%,
+      rgba(45, 212, 191, 0.06),
+      transparent 60%
+    );
+  }
+  h1,
+  h2,
+  h3 {
+    font-family: "Sora", system-ui, sans-serif;
+  }
+  ::selection {
+    background: rgba(45, 212, 191, 0.3);
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-bg-panel border border-bg-border rounded-md shadow-card;
+  }
+  .panel {
+    @apply bg-bg-raised border border-bg-border rounded-lg shadow-panel;
+  }
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-accent text-accent-text font-medium px-4 py-2.5 text-body transition-colors duration-150 hover:bg-accent-hover disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm bg-bg-raised border border-bg-border text-ink font-medium px-4 py-2.5 text-body transition-colors duration-150 hover:border-accent/50 disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  .input-field {
+    @apply w-full rounded-sm bg-bg border border-bg-border px-3.5 py-2.5 text-body text-ink placeholder:text-ink-faint outline-none transition-shadow duration-150 focus:shadow-glow focus:border-accent;
+  }
+  .label {
+    @apply block text-caption font-medium text-ink-muted mb-1.5;
+  }
+  .pill {
+    @apply inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-caption font-medium;
+  }
+  .pill-good {
+    @apply bg-status-good/10 text-status-good border border-status-good/30;
+  }
+  .pill-warn {
+    @apply bg-status-warn/10 text-status-warn border border-status-warn/30;
+  }
+  .pill-bad {
+    @apply bg-status-bad/10 text-status-bad border border-status-bad/30;
+  }
+  .code-block {
+    @apply bg-bg border border-bg-border rounded-sm p-4 font-mono text-caption text-ink overflow-x-auto;
+  }
+}
