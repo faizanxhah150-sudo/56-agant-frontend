@@ -126,7 +126,7 @@ function DeveloperCredit() {
       style={{ color: FOOTER_CREDIT_STYLE.textColor }}
       className="text-base md:text-lg font-bold tracking-wide inline-flex items-center gap-1.5 select-none"
     >
-      @ Developed by Faizan Shah
+      @ Developed by Tahir
       <svg width="18" height="18" viewBox="0 0 24 24" fill={FOOTER_CREDIT_STYLE.heartColor} aria-hidden="true">
         <path d="M12 21s-6.716-4.35-9.428-8.485C.943 9.72 1.5 6.5 4.2 5.1c2.1-1.1 4.514-.5 5.8 1.2L12 8.6l2-2.3c1.286-1.7 3.7-2.3 5.8-1.2 2.7 1.4 3.257 4.62 1.628 7.415C18.716 16.65 12 21 12 21z" />
       </svg>
